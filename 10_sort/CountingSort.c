@@ -19,7 +19,7 @@ int main()
             for(int j=0; j<CountArr[i]; j++)
                 printf("%d\n", i);
         }
-    }
+    } 
 
 
     return 0;
