@@ -38,9 +38,7 @@ int main()
             else{
                 while(1){
                     answer[j++] = pop(&stack);
-                    if(isEmpty(&stack))
-                        break;
-                    if(top(&stack) == '(')
+                    if(isEmpty(&stack) || top(&stack) == '(')
                         break;
 
                 }
