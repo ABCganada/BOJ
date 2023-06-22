@@ -1,22 +1,26 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int K = sc.nextInt();
+    public static void main(String[] args) throws IOException {
 
-        int a = 1;
-        for(int i=0; i<K; i++){
-            a *= N;
-            N--;
-        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        int b = 1;
-        for(int i=2; i<=K; i++){
-            b *= i;
-        }
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
 
-        System.out.println(a / b);
+        System.out.println(factorial(N) / (factorial(N-K) * factorial(K)));
+
+    }
+
+    static int factorial(int N){
+        if(N <= 1)
+            return 1;
+
+        return N * factorial(N-1);
     }
 }
