@@ -6,13 +6,8 @@ public class Main {
 
         long A = sc.nextInt();
         long B = sc.nextInt();
-
-        if(A < B){
-            long tmp = A;
-            A = B;
-            B = tmp;
-        }
-        long N = A*B / gcd(A, B);
+        
+        long N = A*B / gcd(Math.max(A, B), Math.min(A, B));
 
         System.out.println(N);
     }
