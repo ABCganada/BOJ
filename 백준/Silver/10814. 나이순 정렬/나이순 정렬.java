@@ -30,7 +30,7 @@ public class Main {
         });
 
         for(int i=0; i<N; i++){
-            System.out.println(users[i].age + " " + users[i].name);
+            System.out.println(users[i].toString());
         }
     }
 
@@ -45,7 +45,7 @@ public class Main {
 
         @Override
         public String toString() {
-            return age + " " + name + "\n";
+            return age + " " + name;
         }
     }
 }
