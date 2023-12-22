@@ -30,16 +30,11 @@ public class Main {
         int max = dp[0];
 
         for (int i = 1; i < n; i++) {
-            dp[i] = arr[i];
             int sum = dp[i - 1] + arr[i];
 
-            if (dp[i] < sum) {
-                dp[i] = sum;
-            }
+            dp[i] = Math.max(sum, arr[i]);
 
-            if (dp[i] > max) {
-                max = dp[i];
-            }
+            max = Math.max(max, dp[i]);
         }
 
         System.out.println(max);
