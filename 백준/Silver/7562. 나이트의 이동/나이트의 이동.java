@@ -15,15 +15,15 @@ public class Main {
 
     static int bfs(int start, int target) {
         int[][] visit = new int[n][n];
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<int[]> queue = new LinkedList<>();
 
         visit[start / n][start % n] = 1;
-        queue.offer(start);
+        queue.offer(new int[]{start / n, start % n});
 
         while (!queue.isEmpty()) {
-            int now = queue.poll();
-            int nowX = now / n;
-            int nowY = now % n;
+            int[] now = queue.poll();
+            int nowX = now[0];
+            int nowY = now[1];
 
             for (int i = 0; i < 8; i++) {
                 int x = nowX + dx[i];
@@ -32,7 +32,7 @@ public class Main {
                 if (x >= 0 && x < n && y >= 0 && y < n) {
                     if (visit[x][y] == 0) {
                         visit[x][y] = visit[nowX][nowY] + 1;
-                        queue.offer(x * n + y);
+                        queue.offer(new int[]{x, y});
                     }
                 }
 
