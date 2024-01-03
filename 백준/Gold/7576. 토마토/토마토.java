@@ -8,37 +8,34 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
 
-    static int n, m, day;
+    static int n, m, max = 0;
     static int[][] map;
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
 
-    static ArrayList<ArrayList<int[]>> q = new ArrayList<>();
+    static Queue<int[]> q = new LinkedList<>();
 
     static void bfs() {
 
-        while (!q.get(day).isEmpty()) {
-            q.add(day + 1, new ArrayList<>());
+        while (!q.isEmpty()) {
+            int[] now = q.poll();
+            int nowX = now[0];
+            int nowY = now[1];
 
-            for (int i = 0; i < q.get(day).size(); i++) {
-                int[] now = q.get(day).get(i);
-                int nowX = now[0];
-                int nowY = now[1];
+            for (int i = 0; i < 4; i++) {
+                int x = nowX + dx[i];
+                int y = nowY + dy[i];
 
-                for (int j = 0; j < 4; j++) {
-                    int x = nowX + dx[j];
-                    int y = nowY + dy[j];
-
-                    if (x >= 0 && x < n && y >= 0 && y < m) {
-                        if (map[x][y] == 0) {
-                            map[x][y] = day + 1;
-                            q.get(day + 1).add(new int[]{x, y});
+                if (x >= 0 && x < n && y >= 0 && y < m) {
+                    if (map[x][y] == 0) {
+                        map[x][y] = map[nowX][nowY] + 1;
+                        q.offer(new int[]{x, y});
+                        if (max < map[x][y]) {
+                            max = map[x][y];
                         }
                     }
                 }
             }
-
-            day++;
         }
     }
 
@@ -61,14 +58,15 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
         map = new int[n][m];
 
-        q.add(day, new ArrayList<>());
-
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < m; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
                 if (map[i][j] == 1) {
-                    q.get(day).add(new int[]{i, j});
+                    q.offer(new int[]{i, j});
+                    if (max < map[i][j]) {
+                        max = map[i][j];
+                    }
                 }
             }
         }
@@ -76,7 +74,7 @@ public class Main {
         bfs();
 
         if (checkTomato()) {
-            System.out.println(day - 1);
+            System.out.println(max - 1);
         } else {
             System.out.println(-1);
         }
