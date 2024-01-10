@@ -15,11 +15,6 @@ public class Main {
 
     static void partition(int row, int col, int size) {
 
-        if (size == 1) {
-            cnt[map[row][col]]++;
-            return;
-        }
-
         if (check(row, col, size)) {
             return;
         }
